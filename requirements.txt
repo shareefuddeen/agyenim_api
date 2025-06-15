@@ -1,3 +1,13 @@
-Django>=4.0,<5.0
-djangorestframework
-gunicorn
+asgiref==3.8.1
+dj-database-url==3.0.0
+Django==4.2.23
+django-cors-headers==4.7.0
+djangorestframework==3.16.0
+gunicorn==23.0.0
+packaging==25.0
+pillow==11.0.0
+psycopg==3.2.9
+sqlparse==0.5.3
+typing_extensions==4.14.0
+tzdata==2025.2
+whitenoise==6.9.0

@@ -1,6 +1,10 @@
 from django.urls import path
-from .views import HelloWorld
+from . import views
 
 urlpatterns = [
-    path('', HelloWorld.as_view(), name='hello_world'),
+    path("announcements/", views.AnnouncementView.as_view(), name=""),
+    path("faqs/", views.FaqView.as_view(), name=""),
+    path("contact/", views.ContactView.as_view(), name=""),
+    path("blogs/",views.BlogView.as_view(),name=""),
+    path("team/", views.TeamView.as_view(), name="")
 ]
