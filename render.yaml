@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: agyenim-boateng-api
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn agyenim_boateng.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: agyenim_boateng.settings.base
