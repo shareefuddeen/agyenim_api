@@ -6,7 +6,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = 'your-secret-key'
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -97,10 +97,9 @@ CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": os.environ.get("REDIS_URL", "redis://127.0.0.1:6379/1"),
-        "TIMEOUT":1200,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "PASSWORD": os.environ.get("REDIS_PASSWORD", None),  
+            "PASSWORD": os.environ.get("REDIS_PASSWORD", None),  # Optional
             "SSL": True,
         }
     }

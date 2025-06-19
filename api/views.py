@@ -5,8 +5,8 @@ from . import models
 from . import serializers
 from django.core.cache import cache
 from django.http import JsonResponse
-
-
+from django.db.models.signals import post_save,post_delete
+from django.dispatch import receiver
 
 class AnnouncementView(APIView):
     def get(self, request):
@@ -54,7 +54,7 @@ class ContactView(APIView):
 
 class BlogView(APIView):
     def get(self, request):
-        data = cache.get('blogs_view')
+        data = cache.get('blogs_list')
         if data:
             blogs = data
         else:
@@ -63,6 +63,7 @@ class BlogView(APIView):
                 return Response({"error": "No blogd found"}, status=status.HTTP_404_NOT_FOUND)
             serializer = serializers.BlogSerializer(queryset, many=True)
             blogs = serializer.data
+            cache.set('blog_list')
         return Response(blogs, status=status.HTTP_200_OK)
     
 class TeamView(APIView):
@@ -76,6 +77,7 @@ class TeamView(APIView):
                 return Response({"erro:":"no team found"},status=status.HTTP_404_NOT_FOUND)
             serializer = serializers.TeamSerializer(queryset, many =True)
             team = serializer.data
+            cache.set('team_list')
         return Response(team, status=status.HTTP_200_OK)
 
 
@@ -84,3 +86,25 @@ def redis_test_view(request):
     cache.set('redis_test_key', 'Redis is working!', timeout=60)
     value = cache.get('redis_test_key')
     return JsonResponse({'message': value})
+
+#signals
+@receiver(post_save, sender=models.Announcement)
+@receiver(post_delete,sender=models.Announcement)
+def clear_cache(sender,instance,**kwargs):
+    cache.delete('announcement_list')
+    
+
+@receiver(post_save, sender=models.Faqs)
+@receiver(post_delete,sender=models.Faqs)
+def clear_cache(sender,instance,**kwargs):
+    cache.delete('faqs_list')
+    
+@receiver(post_save, sender=models.Blog)
+@receiver(post_delete,sender=models.Blog)
+def clear_cache(sender,instance,**kwargs):
+    cache.delete('blog_list')
+    
+@receiver(post_save, sender=models.Team)
+@receiver(post_delete,sender=models.Team)
+def clear_cache(sender,instance,**kwargs):
+    cache.delete('team_list')
