@@ -77,7 +77,7 @@ class TeamView(APIView):
                 return Response({"erro:":"no team found"},status=status.HTTP_404_NOT_FOUND)
             serializer = serializers.TeamSerializer(queryset, many =True,context={"request": request})
             team = serializer.data
-            cache.set('team_list',team)
+            cache.set('team_list',team,timeout=60)
         return Response(team, status=status.HTTP_200_OK)
 
 
