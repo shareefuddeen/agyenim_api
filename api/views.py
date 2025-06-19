@@ -35,7 +35,7 @@ class FaqView(APIView):
                 return Response({"error": "No FAQs found"}, status=status.HTTP_404_NOT_FOUND)
             serializer = serializers.FaqSerializer(queryset, many=True)
             faqs = serializer.data
-            cache.set('faqs_list')
+            cache.set('faqs_list',faqs)
         return Response(faqs, status=status.HTTP_200_OK)
 
 class ContactView(APIView):
@@ -63,7 +63,7 @@ class BlogView(APIView):
                 return Response({"error": "No blogd found"}, status=status.HTTP_404_NOT_FOUND)
             serializer = serializers.BlogSerializer(queryset, many=True)
             blogs = serializer.data
-            cache.set('blog_list')
+            cache.set('blog_list',blogs)
         return Response(blogs, status=status.HTTP_200_OK)
     
 class TeamView(APIView):
@@ -77,7 +77,7 @@ class TeamView(APIView):
                 return Response({"erro:":"no team found"},status=status.HTTP_404_NOT_FOUND)
             serializer = serializers.TeamSerializer(queryset, many =True)
             team = serializer.data
-            cache.set('team_list')
+            cache.set('team_list',team)
         return Response(team, status=status.HTTP_200_OK)
 
 
