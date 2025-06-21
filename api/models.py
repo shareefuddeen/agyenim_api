@@ -35,7 +35,7 @@ class Contact(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=66, null=False,blank=False)
     content = models.TextField(null=False,blank=False)
-    image = models.ImageField(upload_to="images",null=True,blank=True)
+    image = CloudinaryField('image', blank=True, null=True)
     date = models.DateField()
     date_created = models.DateTimeField(auto_now_add=True)
 
