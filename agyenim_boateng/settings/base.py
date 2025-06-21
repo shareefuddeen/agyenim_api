@@ -5,6 +5,13 @@ from django.conf import settings
 
 
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':dvh3bccvb,
+    'API_KEY': 872878457245517,
+    'API_SECRET': 68-DmEiowaNMmk3XDTt9IaiepNc,
+}
+
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 print(settings.DEFAULT_FILE_STORAGE)
 
