@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 class Announcement(models.Model):
     title = models.CharField(null= False,blank=False , max_length=50)
@@ -45,7 +46,8 @@ class Team(models.Model):
     name =models.CharField(max_length=50,null=False,blank=False)
     title = models.CharField(max_length=40,null=False,blank=False)
     description = models.CharField(max_length=160,null=False,blank=False)
-    image = models.ImageField(upload_to="images",null=False,blank=False)
+    image = CloudinaryField('image', blank=True, null=True)
+
     
     def __str__(self):
         return f'{self.name} ({self.title})'

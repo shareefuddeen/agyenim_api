@@ -2,10 +2,12 @@ from pathlib import Path
 import os
 import dj_database_url
 from django.conf import settings
+from dotenv import load_dotenv
+load_dotenv()
 
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-print(settings.DEFAULT_FILE_STORAGE)
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -17,10 +19,6 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_ALL_ORIGINS = True 
 
-
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
-
 # Where collectstatic will collect static files for production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -28,6 +26,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # WhiteNoise settings (optional but recommended)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
+
 
 
 INSTALLED_APPS = [
@@ -96,8 +101,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
