@@ -3,6 +3,10 @@ import os
 import dj_database_url
 
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = 'your-secret-key'
@@ -39,7 +43,6 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'storages',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
